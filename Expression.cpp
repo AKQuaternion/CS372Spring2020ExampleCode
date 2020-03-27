@@ -4,8 +4,8 @@
 
 #include "Expression.hpp"
 
-SumExpression::SumExpression(unique_ptr<Expression> &&lhs,
-                             unique_ptr<Expression> &&rhs)
+SumExpression::SumExpression(std::unique_ptr<Expression> &&lhs,
+                             std::unique_ptr<Expression> &&rhs)
     : _lhs{move(lhs)}, _rhs{move(rhs)}
 {}
 
@@ -19,8 +19,8 @@ int SumExpression::evaluate() const {
   return _lhs->evaluate() + _rhs->evaluate();
 }
 
-MinusExpression::MinusExpression(unique_ptr<Expression> &&lhs,
-                                 unique_ptr<Expression> &&rhs)
+MinusExpression::MinusExpression(std::unique_ptr<Expression> &&lhs,
+                                 std::unique_ptr<Expression> &&rhs)
     : _lhs{move(lhs)}, _rhs{move(rhs)}
 {}
 
@@ -33,8 +33,8 @@ int MinusExpression::evaluate() const {
   return _lhs->evaluate() - _rhs->evaluate();
 }
 
-TimesExpression::TimesExpression(unique_ptr<Expression> &&lhs,
-                                 unique_ptr<Expression> &&rhs)
+TimesExpression::TimesExpression(std::unique_ptr<Expression> &&lhs,
+                                 std::unique_ptr<Expression> &&rhs)
     : _lhs{move(lhs)}, _rhs{move(rhs)}
 {}
 
@@ -55,8 +55,8 @@ int DivideExpression::evaluate() const {
   return _lhs->evaluate() + _rhs->evaluate();
 }
 
-DivideExpression::DivideExpression(unique_ptr<Expression> &&lhs,
-                                   unique_ptr<Expression> &&rhs)
+DivideExpression::DivideExpression(std::unique_ptr<Expression> &&lhs,
+                                   std::unique_ptr<Expression> &&rhs)
     : _lhs{move(lhs)}, _rhs{move(rhs)}
 {}
 

@@ -5,11 +5,7 @@
 #ifndef CS372SPRING2020EXAMPLECODE_EXPRESSION_HPP
 #define CS372SPRING2020EXAMPLECODE_EXPRESSION_HPP
 #include <memory>
-using std::unique_ptr;
-using std::make_unique;
-using std::move;
 #include <iostream>
-using std::cout;
 #include <string>
 
 // E → E + E
@@ -27,42 +23,42 @@ public:
 
 class SumExpression : public Expression {
 public:
-  SumExpression(unique_ptr<Expression> &&lhs , unique_ptr<Expression> &&rhs);
+  SumExpression(std::unique_ptr<Expression> &&lhs , std::unique_ptr<Expression> &&rhs);
    std::string print() const override;
   int evaluate() const override;
 private:
-  unique_ptr<Expression> _lhs;
-  unique_ptr<Expression> _rhs;
+   std::unique_ptr<Expression> _lhs;
+   std::unique_ptr<Expression> _rhs;
 };
 
 class MinusExpression : public Expression {
 public:
-  MinusExpression(unique_ptr<Expression> &&lhs , unique_ptr<Expression> &&rhs);
+  MinusExpression(std::unique_ptr<Expression> &&lhs , std::unique_ptr<Expression> &&rhs);
    std::string print() const override;
   int evaluate() const override;;
 private:
-  unique_ptr<Expression> _lhs;
-  unique_ptr<Expression> _rhs;
+   std::unique_ptr<Expression> _lhs;
+   std::unique_ptr<Expression> _rhs;
 };
 
 class TimesExpression : public Expression {
 public:
-  TimesExpression(unique_ptr<Expression> &&lhs , unique_ptr<Expression> &&rhs);
+  TimesExpression(std::unique_ptr<Expression> &&lhs , std::unique_ptr<Expression> &&rhs);
    std::string print() const override;
   int evaluate() const override;;
 private:
-  unique_ptr<Expression> _lhs;
-  unique_ptr<Expression> _rhs;
+   std::unique_ptr<Expression> _lhs;
+   std::unique_ptr<Expression> _rhs;
 };
 
 class DivideExpression : public Expression {
 public:
-  DivideExpression(unique_ptr<Expression> &&lhs , unique_ptr<Expression> &&rhs);
+  DivideExpression(std::unique_ptr<Expression> &&lhs , std::unique_ptr<Expression> &&rhs);
    std::string print() const override;
   int evaluate() const override;;
 private:
-  unique_ptr<Expression> _lhs;
-  unique_ptr<Expression> _rhs;
+   std::unique_ptr<Expression> _lhs;
+   std::unique_ptr<Expression> _rhs;
 };
 
 class NumberExpression : public Expression {

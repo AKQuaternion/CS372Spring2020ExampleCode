@@ -1,5 +1,11 @@
+#include <iostream>
+using std::cout;
+using std::endl;
+
 #include "moderncppexamples.hpp"
 #include "Expression.hpp"
+using std::unique_ptr;
+using std::make_unique;
 
 int main() {
   unique_ptr<Expression> fifteen = make_unique<NumberExpression>(15);
