@@ -2,28 +2,28 @@
 using std::cout;
 using std::endl;
 
-#include "moderncppexamples.hpp"
 #include "Expression.hpp"
-using std::unique_ptr;
+#include "moderncppexamples.hpp"
 using std::make_unique;
+using std::unique_ptr;
 
 int main() {
   unique_ptr<Expression> fifteen = make_unique<NumberExpression>(15);
 
   cout << fifteen->toString() << std::endl;
   unique_ptr<Expression> four = make_unique<NumberExpression>(4);
-  unique_ptr<Expression> s = make_unique<SumExpression>(move(fifteen),move(four));
+  unique_ptr<Expression> s =
+      make_unique<SumExpression>(move(fifteen), move(four));
 
   cout << s->toString() << "\n";
   cout << "The value of s is " << s->evaluate() << std::endl;
 
   unique_ptr<Expression> comp = make_unique<TimesExpression>(
-      move(s),
-      make_unique<MinusExpression>(make_unique<NumberExpression>(13),
-          make_unique<NumberExpression>(9))
-      );
+      move(s), make_unique<MinusExpression>(make_unique<NumberExpression>(13),
+                                            make_unique<NumberExpression>(9)));
 
-  cout << "The value of " << comp->toString() << " is " << comp->evaluate() << std::endl;
+  cout << "The value of " << comp->toString() << " is " << comp->evaluate()
+       << std::endl;
   return 0;
 }
 
