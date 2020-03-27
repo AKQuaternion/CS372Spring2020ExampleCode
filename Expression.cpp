@@ -9,8 +9,8 @@ SumExpression::SumExpression(std::unique_ptr<Expression> &&lhs,
     : _lhs{move(lhs)}, _rhs{move(rhs)}
 {}
 
-std::string SumExpression::print() const {
-  return _lhs->print() + " + " +_rhs->print();
+std::string SumExpression::toString() const {
+  return _lhs->toString() + " + " + _rhs->toString();
 
   return "";
 }
@@ -24,8 +24,8 @@ MinusExpression::MinusExpression(std::unique_ptr<Expression> &&lhs,
     : _lhs{move(lhs)}, _rhs{move(rhs)}
 {}
 
-std::string MinusExpression::print() const {
-  return _lhs->print() + " - " +_rhs->print();
+std::string MinusExpression::toString() const {
+  return _lhs->toString() + " - " + _rhs->toString();
 
 }
 
@@ -42,13 +42,13 @@ int TimesExpression:: evaluate() const {
   return _lhs->evaluate() * _rhs->evaluate();
 }
 
-std::string TimesExpression::print() const {
-  return _lhs->print() + " * " +_rhs->print();
+std::string TimesExpression::toString() const {
+  return _lhs->toString() + " * " + _rhs->toString();
 
 }
 
-std::string DivideExpression::print() const {
-  return _lhs->print() + " / " +_rhs->print();
+std::string DivideExpression::toString() const {
+  return _lhs->toString() + " / " + _rhs->toString();
 }
 
 int DivideExpression::evaluate() const {
@@ -60,7 +60,7 @@ DivideExpression::DivideExpression(std::unique_ptr<Expression> &&lhs,
     : _lhs{move(lhs)}, _rhs{move(rhs)}
 {}
 
-std::string NumberExpression::print() const {
+std::string NumberExpression::toString() const {
   return std::to_string(_number);
 }
 

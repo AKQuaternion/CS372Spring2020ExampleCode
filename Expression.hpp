@@ -17,14 +17,14 @@
 class Expression {
 public:
   virtual ~Expression() = default;
-  virtual std::string print() const=0;
+  virtual std::string toString() const=0;
   virtual int evaluate() const=0;
 };
 
 class SumExpression : public Expression {
 public:
   SumExpression(std::unique_ptr<Expression> &&lhs , std::unique_ptr<Expression> &&rhs);
-   std::string print() const override;
+   std::string toString() const override;
   int evaluate() const override;
 private:
    std::unique_ptr<Expression> _lhs;
@@ -34,7 +34,7 @@ private:
 class MinusExpression : public Expression {
 public:
   MinusExpression(std::unique_ptr<Expression> &&lhs , std::unique_ptr<Expression> &&rhs);
-   std::string print() const override;
+   std::string toString() const override;
   int evaluate() const override;;
 private:
    std::unique_ptr<Expression> _lhs;
@@ -44,7 +44,7 @@ private:
 class TimesExpression : public Expression {
 public:
   TimesExpression(std::unique_ptr<Expression> &&lhs , std::unique_ptr<Expression> &&rhs);
-   std::string print() const override;
+   std::string toString() const override;
   int evaluate() const override;;
 private:
    std::unique_ptr<Expression> _lhs;
@@ -54,7 +54,7 @@ private:
 class DivideExpression : public Expression {
 public:
   DivideExpression(std::unique_ptr<Expression> &&lhs , std::unique_ptr<Expression> &&rhs);
-   std::string print() const override;
+   std::string toString() const override;
   int evaluate() const override;;
 private:
    std::unique_ptr<Expression> _lhs;
@@ -64,7 +64,7 @@ private:
 class NumberExpression : public Expression {
 public:
   NumberExpression(int number);
-   std::string print() const override;
+   std::string toString() const override;
   int evaluate() const override;
 private:
   int _number;
