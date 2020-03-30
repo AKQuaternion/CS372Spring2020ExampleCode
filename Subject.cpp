@@ -13,7 +13,7 @@ void Subject::attach(std::shared_ptr<Observer> o){
 }
 
 void Subject::detach(std::shared_ptr<Observer> o){
-    _observers.erase(std::find(_observers.begin(),_observers.end(),o));
+    _observers.erase(o);
 }
 
 void Subject::notify() const{
