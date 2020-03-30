@@ -3,11 +3,14 @@ using std::cout;
 using std::endl;
 
 #include "Expression.hpp"
-#include "moderncppexamples.hpp"
 using std::make_unique;
 using std::unique_ptr;
+#include "StoreByReference.hpp"
+#include "StoreByPointer.hpp"
 
-int main() {
+#include "moderncppexamples.hpp"
+
+void demonstrateExpressions() {
   unique_ptr<Expression> fifteen = make_unique<NumberExpression>(15);
 
   cout << fifteen->toString() << std::endl;
@@ -24,9 +27,41 @@ int main() {
 
   cout << "The value of " << comp->toString() << " is " << comp->evaluate()
        << std::endl;
+}
+
+
+void demonstrateStoreByReference() {
+    cout << "\nDemonstrating store by reference:\n";
+    RepairFacility downtown("456 1st Avenue");
+    RepairFacility hillside("123 Oak St.");
+
+    RobotR kim("Kim",downtown);
+    RobotR joe("Joseph", hillside);
+
+    kim.repair();
+    joe.repair();
+}
+
+void demonstrateStoreByPointer() {
+    cout << "\nDemonstrating store by pointer:\n";
+    RepairFacility downtown("456 1st Avenue");
+    RepairFacility hillside("123 Oak St.");
+
+    RobotP kim("Kim",&downtown);
+    RobotP joe("Joseph", &hillside);
+
+    kim.repair();
+    joe.repair();
+
+    kim.changeRepairFacility(&hillside);
+    kim.repair();
+}
+
+int main() {
+    demonstrateStoreByReference();
+    demonstrateStoreByPointer();
   return 0;
 }
 
-// Possible extensions
-// Factory for making expressions
+// Possible extensions:
 // Refactor so that there isn't so much duplicated code in binary expressions
