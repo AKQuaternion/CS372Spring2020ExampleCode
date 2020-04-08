@@ -29,8 +29,8 @@ using std::all_of;
 
 auto magicNumber(string_view word) {
   unsigned long answer = 0;
-  for (auto ii = 0; ii < 20000; ++ii)
-    answer += ii % word[ii % word.length()];
+  for (auto ii = 0u; ii < 20000; ++ii)
+    answer += ii % static_cast<unsigned int>(word[ii % word.length()]);
   return answer;
 }
 
@@ -61,8 +61,8 @@ void async_main() {
   const int numThreads = 1000;
   for (int i = 0; i < numThreads; ++i) {
     auto numWords = dictionary.size();
-    auto start = i / double(numThreads) * numWords + begin(dictionary);
-    auto finish = (i + 1) / double(numThreads) * numWords +
+    auto start = int(i / double(numThreads) * numWords) + begin(dictionary);
+    auto finish = int((i + 1) / double(numThreads) * numWords) +
                   begin(dictionary);
 
     results.push_back(std::async(std::launch::async,
