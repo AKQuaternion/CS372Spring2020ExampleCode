@@ -17,6 +17,8 @@
 class Expression {
 public:
    virtual ~Expression() = default;
+   Expression() = default;
+   Expression(const Expression &) = default;
    virtual std::unique_ptr<Expression> clone() const = 0;
    virtual std::string toString() const = 0;
    virtual int evaluate() const = 0;

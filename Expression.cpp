@@ -14,8 +14,6 @@ std::unique_ptr<Expression> SumExpression::clone() const {
 
 std::string SumExpression::toString() const {
   return _lhs->toString() + " + " + _rhs->toString();
-
-  return "";
 }
 
 int SumExpression::evaluate() const {
