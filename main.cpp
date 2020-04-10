@@ -13,7 +13,9 @@ using std::unique_ptr;
 
 #include "Observer.hpp"
 using std::make_shared;
-#include "Subject.hpp"
+#include "Subject.hpp"\
+
+#include "Armor.hpp"
 
 void demonstrateExpressions() {
   unique_ptr<Expression> fifteen = make_unique<NumberExpression>(15);
@@ -87,11 +89,22 @@ void demonstrateObserver() {
    s.setN(1);
 }
 
+void demonstrateDecorator() {
+   unique_ptr<ArmorComponent> plate = make_unique<PlateArmor>();
+   cout << plate->description() << endl;
+   unique_ptr<ArmorComponent> rustyPlate = make_unique<RustyDecorator>(move(plate));
+   cout << rustyPlate->description() << endl;
+   unique_ptr<ArmorComponent> rustyrustyPlate = make_unique<RustyDecorator>(move(rustyPlate));
+   cout << rustyrustyPlate->description() << endl;
+}
+
 int main() {
 //    demonstrateStoreByReference();
 //    demonstrateStoreByPointer();
 //   demonstrateExpressions();
-   demonstrateObserver();
+//   demonstrateObserver();
+   demonstrateDecorator();
+
    return 0;
 }
 
