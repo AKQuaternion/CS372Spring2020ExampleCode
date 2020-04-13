@@ -3,3 +3,7 @@
 //
 
 #include "Armor.hpp"
+
+std::string ArmorDecorator::description() const {
+   return _wrappee->description();
+}

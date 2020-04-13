@@ -41,11 +41,10 @@ public:
     ArmorDecorator(std::unique_ptr<ArmorComponent> wrappee)
     :_wrappee(std::move(wrappee))
     {}
-    std::string description() const override {
-        return _wrappee->description();
-    }
+    std::string description() const override = 0;
+
     int getAC() const override {
-        return _wrappee->getAC();
+        return _wrappee->getAC();  //bad, implements a virtual function which derived clases will override
     }
 private:
     std::unique_ptr<ArmorComponent> _wrappee;
@@ -53,13 +52,25 @@ private:
 
 class RustyDecorator : public ArmorDecorator {
 public:
-    using ArmorDecorator::ArmorDecorator;
-    std::string description() const override {
-        return "Rusty " + ArmorDecorator::description();
-    }
-    int getAC() const override {
-        return ArmorDecorator::getAC() - 3;
-    }
+   using ArmorDecorator::ArmorDecorator;
+   std::string description() const override {
+      return "Rusty " + ArmorDecorator::description();
+   }
+   int getAC() const override {
+      return ArmorDecorator::getAC() - 3;
+   }
+};
+
+
+class MagicDecorator : public ArmorDecorator {
+public:
+   using ArmorDecorator::ArmorDecorator;
+   std::string description() const override {
+      return "Magic " + ArmorDecorator::description();
+   }
+   int getAC() const override {
+      return ArmorDecorator::getAC() + 1;
+   }
 };
 
 

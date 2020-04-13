@@ -91,11 +91,13 @@ void demonstrateObserver() {
 
 void demonstrateDecorator() {
    unique_ptr<ArmorComponent> plate = make_unique<PlateArmor>();
-   cout << plate->description() << endl;
+   cout << plate->description() << " has AC " << plate->getAC() << endl;
    unique_ptr<ArmorComponent> rustyPlate = make_unique<RustyDecorator>(move(plate));
-   cout << rustyPlate->description() << endl;
+   cout << rustyPlate->description() << " has AC " << rustyPlate->getAC() << endl;
    unique_ptr<ArmorComponent> rustyrustyPlate = make_unique<RustyDecorator>(move(rustyPlate));
-   cout << rustyrustyPlate->description() << endl;
+   cout << rustyrustyPlate->description() << " has AC " << rustyrustyPlate->getAC() << endl;
+   unique_ptr<ArmorComponent> magicLeather = make_unique<MagicDecorator>(make_unique<LeatherArmor>());
+   cout << magicLeather->description() << " has AC " << magicLeather->getAC() << endl;
 }
 
 int main() {
