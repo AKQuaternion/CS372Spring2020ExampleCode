@@ -19,18 +19,18 @@ public:
    virtual ~Expression() = default;
    Expression() = default;
    Expression(const Expression &) = default;
-   virtual std::unique_ptr<Expression> clone() const = 0;
-   virtual std::string toString() const = 0;
-   virtual int evaluate() const = 0;
+   [[nodiscard]] virtual std::unique_ptr<Expression> clone() const = 0;
+   [[nodiscard]] virtual std::string toString() const = 0;
+   [[nodiscard]] virtual int evaluate() const = 0;
 };
 
 class SumExpression : public Expression {
 public:
    SumExpression(std::unique_ptr<Expression> &&lhs,
                  std::unique_ptr<Expression> &&rhs);
-   std::unique_ptr<Expression> clone() const override;
-   std::string toString() const override;
-   int evaluate() const override;
+   [[nodiscard]] std::unique_ptr<Expression> clone() const override;
+   [[nodiscard]] std::string toString() const override;
+   [[nodiscard]] int evaluate() const override;
 
 private:
    std::unique_ptr<Expression> _lhs;
@@ -41,9 +41,9 @@ class MinusExpression : public Expression {
 public:
    MinusExpression(std::unique_ptr<Expression> &&lhs,
                    std::unique_ptr<Expression> &&rhs);
-   std::unique_ptr<Expression> clone() const override;
-   std::string toString() const override;
-   int evaluate() const override;
+   [[nodiscard]] std::unique_ptr<Expression> clone() const override;
+   [[nodiscard]] std::string toString() const override;
+   [[nodiscard]] int evaluate() const override;
 
 private:
    std::unique_ptr<Expression> _lhs;
@@ -54,9 +54,9 @@ class TimesExpression : public Expression {
 public:
    TimesExpression(std::unique_ptr<Expression> &&lhs,
                    std::unique_ptr<Expression> &&rhs);
-   std::unique_ptr<Expression> clone() const override;
-   std::string toString() const override;
-   int evaluate() const override;
+   [[nodiscard]] std::unique_ptr<Expression> clone() const override;
+   [[nodiscard]] std::string toString() const override;
+   [[nodiscard]] int evaluate() const override;
 
 private:
    std::unique_ptr<Expression> _lhs;
@@ -67,9 +67,9 @@ class DivideExpression : public Expression {
 public:
    DivideExpression(std::unique_ptr<Expression> &&lhs,
                     std::unique_ptr<Expression> &&rhs);
-   std::unique_ptr<Expression> clone() const override;
-   std::string toString() const override;
-   int evaluate() const override;
+   [[nodiscard]] std::unique_ptr<Expression> clone() const override;
+   [[nodiscard]] std::string toString() const override;
+   [[nodiscard]] int evaluate() const override;
 
 private:
    std::unique_ptr<Expression> _lhs;
@@ -78,10 +78,10 @@ private:
 
 class NumberExpression : public Expression {
 public:
-   NumberExpression(int number);
-   std::unique_ptr<Expression> clone() const override;
-   std::string toString() const override;
-   int evaluate() const override;
+   NumberExpression(int number); //NOLINT
+   [[nodiscard]] std::unique_ptr<Expression> clone() const override;
+   [[nodiscard]] std::string toString() const override;
+   [[nodiscard]] int evaluate() const override;
 
 private:
    int _number;

@@ -7,29 +7,29 @@
 class ArmorComponent {
 public:
     virtual ~ArmorComponent() = default;
-    virtual std::string description() const=0 ;
-    virtual int getAC() const=0 ;
+    [[nodiscard]] virtual std::string description() const=0 ;
+    [[nodiscard]] virtual int getAC() const=0 ;
 };
 
 class PlateArmor : public ArmorComponent {
-   virtual std::string description() const
+   [[nodiscard]] std::string description() const override
    {
       return "Plate Mail";
    }
 
-   virtual int getAC() const
+   [[nodiscard]] int getAC() const override
    {
       return 10;
    }
 };
 
 class LeatherArmor : public ArmorComponent {
-   virtual std::string description() const
+   [[nodiscard]] std::string description() const override
    {
       return "Leather Armor";
    }
 
-   virtual int getAC() const
+   [[nodiscard]]int getAC() const override
    {
       return 3;
    }
@@ -38,12 +38,12 @@ class LeatherArmor : public ArmorComponent {
 
 class ArmorDecorator : public ArmorComponent {
 public:
-    ArmorDecorator(std::unique_ptr<ArmorComponent> wrappee)
+    explicit ArmorDecorator(std::unique_ptr<ArmorComponent> wrappee)
     :_wrappee(std::move(wrappee))
     {}
-    std::string description() const override = 0;
+    [[nodiscard]] std::string description() const override = 0;
 
-    int getAC() const override {
+    [[nodiscard]] int getAC() const override {
         return _wrappee->getAC();  //bad, implements a virtual function which derived clases will override
     }
 private:
@@ -53,10 +53,10 @@ private:
 class RustyDecorator : public ArmorDecorator {
 public:
    using ArmorDecorator::ArmorDecorator;
-   std::string description() const override {
+   [[nodiscard]] std::string description() const override {
       return "Rusty " + ArmorDecorator::description();
    }
-   int getAC() const override {
+   [[nodiscard]] int getAC() const override {
       return ArmorDecorator::getAC() - 3;
    }
 };
@@ -65,10 +65,10 @@ public:
 class MagicDecorator : public ArmorDecorator {
 public:
    using ArmorDecorator::ArmorDecorator;
-   std::string description() const override {
+   [[nodiscard]] std::string description() const override {
       return "Magic " + ArmorDecorator::description();
    }
-   int getAC() const override {
+   [[nodiscard]] int getAC() const override {
       return ArmorDecorator::getAC() + 1;
    }
 };
