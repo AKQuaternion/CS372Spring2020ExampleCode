@@ -1,0 +1,42 @@
+//
+// Created by Chris Hartman on 2019-04-19.
+//
+
+#ifndef CS372SPRING2020EXAMPLECODE_HOMEAUTOMATIONCOMPONENT_HPP
+#define CS372SPRING2020EXAMPLECODE_HOMEAUTOMATIONCOMPONENT_HPP
+
+#include <iostream>
+
+class HomeAutomationComponent {
+public:
+   virtual ~HomeAutomationComponent() = default;
+   virtual void on() = 0;
+   virtual void off() = 0;
+};
+
+/* In this example code we include the declarations of derived command
+ * classes in the same file as the base class. In a "real" project they are
+ * usually in a different include file, so that clients who deal only with
+ * base class handles do not need to recomplile or change in any way when
+ * a new command is added.
+ * */
+
+class FanObject : public HomeAutomationComponent {
+public:
+   void on() final;
+   void off() final;
+};
+
+class LightObject : public HomeAutomationComponent {
+public:
+   void on() final;
+   void off() final;
+};
+
+class StereoObject : public HomeAutomationComponent {
+public:
+   void on() final;
+   void off() final;
+};
+
+#endif  // CS372SPRING2020EXAMPLECODE_HOMEAUTOMATIONCOMPONENT_HPP

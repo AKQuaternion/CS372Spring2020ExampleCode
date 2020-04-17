@@ -6,29 +6,34 @@ using std::endl;
 using std::make_unique;
 using std::unique_ptr;
 
-#include "StoreByReference.hpp"
 #include "StoreByPointer.hpp"
+#include "StoreByReference.hpp"
 
 #include "moderncppexamples.hpp"
 
 #include "Observer.hpp"
 using std::make_shared;
-#include "Subject.hpp"\
+#include "Subject.hpp"
 
 #include "Armor.hpp"
 
-void demonstrateExpressions() {
-  unique_ptr<Expression> fifteen = make_unique<NumberExpression>(15);
+#include "Command.hpp"
+#include "HomeAutomationComponent.hpp"
+using std::shared_ptr;
+using std::vector;
 
-  cout << fifteen->toString() << std::endl;
-  unique_ptr<Expression> four = make_unique<NumberExpression>(4);
-  unique_ptr<Expression> s =
+void demonstrateExpressions() {
+   unique_ptr<Expression> fifteen = make_unique<NumberExpression>(15);
+
+   cout << fifteen->toString() << std::endl;
+   unique_ptr<Expression> four = make_unique<NumberExpression>(4);
+   unique_ptr<Expression> s =
       make_unique<SumExpression>(move(fifteen), move(four));
 
-  cout << s->toString() << "\n";
-  cout << "The value of s is " << s->evaluate() << std::endl;
+   cout << s->toString() << "\n";
+   cout << "The value of s is " << s->evaluate() << std::endl;
 
-  unique_ptr<Expression> comp = make_unique<TimesExpression>(
+   unique_ptr<Expression> comp = make_unique<TimesExpression>(
       move(s), make_unique<MinusExpression>(make_unique<NumberExpression>(13),
                                             make_unique<NumberExpression>(9)));
 
@@ -37,38 +42,37 @@ void demonstrateExpressions() {
 
    auto compClone = comp->clone();
 
-   auto squareIt = make_unique<DivideExpression>(move(comp),move(compClone));
+   auto squareIt = make_unique<DivideExpression>(move(comp), move(compClone));
 
-   cout << "The value of " << squareIt->toString() << " is " << squareIt->evaluate()
-        << std::endl;
+   cout << "The value of " << squareIt->toString() << " is "
+        << squareIt->evaluate() << std::endl;
 }
 
-
 void demonstrateStoreByReference() {
-    cout << "\nDemonstrating store by reference:\n";
-    RepairFacility downtown("456 1st Avenue");
-    RepairFacility hillside("123 Oak St.");
+   cout << "\nDemonstrating store by reference:\n";
+   RepairFacility downtown("456 1st Avenue");
+   RepairFacility hillside("123 Oak St.");
 
-    RobotR kim("Kim",downtown);
-    RobotR joe("Joseph", hillside);
+   RobotR kim("Kim", downtown);
+   RobotR joe("Joseph", hillside);
 
-    kim.repair();
-    joe.repair();
+   kim.repair();
+   joe.repair();
 }
 
 void demonstrateStoreByPointer() {
-    cout << "\nDemonstrating store by pointer:\n";
-    RepairFacility downtown("456 1st Avenue");
-    RepairFacility hillside("123 Oak St.");
+   cout << "\nDemonstrating store by pointer:\n";
+   RepairFacility downtown("456 1st Avenue");
+   RepairFacility hillside("123 Oak St.");
 
-    RobotP kim("Kim",&downtown);
-    RobotP joe("Joseph", &hillside);
+   RobotP kim("Kim", &downtown);
+   RobotP joe("Joseph", &hillside);
 
-    kim.repair();
-    joe.repair();
+   kim.repair();
+   joe.repair();
 
-    kim.changeRepairFacility(&hillside);
-    kim.repair();
+   kim.changeRepairFacility(&hillside);
+   kim.repair();
 }
 
 void demonstrateObserver() {
@@ -92,21 +96,40 @@ void demonstrateObserver() {
 void demonstrateDecorator() {
    unique_ptr<ArmorComponent> plate = make_unique<PlateArmor>();
    cout << plate->description() << " has AC " << plate->getAC() << endl;
-   unique_ptr<ArmorComponent> rustyPlate = make_unique<RustyDecorator>(move(plate));
-   cout << rustyPlate->description() << " has AC " << rustyPlate->getAC() << endl;
-   unique_ptr<ArmorComponent> rustyrustyPlate = make_unique<RustyDecorator>(move(rustyPlate));
-   cout << rustyrustyPlate->description() << " has AC " << rustyrustyPlate->getAC() << endl;
-   unique_ptr<ArmorComponent> magicLeather = make_unique<MagicDecorator>(make_unique<LeatherArmor>());
-   cout << magicLeather->description() << " has AC " << magicLeather->getAC() << endl;
+   unique_ptr<ArmorComponent> rustyPlate =
+      make_unique<RustyDecorator>(move(plate));
+   cout << rustyPlate->description() << " has AC " << rustyPlate->getAC()
+        << endl;
+   unique_ptr<ArmorComponent> rustyrustyPlate =
+      make_unique<RustyDecorator>(move(rustyPlate));
+   cout << rustyrustyPlate->description() << " has AC "
+        << rustyrustyPlate->getAC() << endl;
+   unique_ptr<ArmorComponent> magicLeather =
+      make_unique<MagicDecorator>(make_unique<LeatherArmor>());
+   cout << magicLeather->description() << " has AC " << magicLeather->getAC()
+        << endl;
+}
+
+void demonstrateCommand()   {
+   auto f = make_shared<FanObject>();
+   f->on();
+   f->off();
+   auto l = make_shared<LightObject>();
+   l->on();
+   l->off();
+   auto s = make_shared<StereoObject>();
+   s->on();
+   s->off();
 }
 
 int main() {
-//    demonstrateStoreByReference();
-//    demonstrateStoreByPointer();
-//   demonstrateExpressions();
-//   demonstrateObserver();
-   demonstrateDecorator();
-
+   //   modernCppExamples();
+   //   demonstrateStoreByReference();
+   //   demonstrateStoreByPointer();
+   //   demonstrateExpressions();
+   //   demonstrateObserver();
+   //   demonstrateDecorator();
+   demonstrateCommand();
    return 0;
 }
 
