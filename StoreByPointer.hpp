@@ -7,6 +7,9 @@
 // For ease of reading, we use poor style and define our class functions
 // inline.
 
+#include <utility>
+
+#include "StoreByReference.hpp"
 /*
  * In StoreByReference.hpp, we made Robots with a RepairFacility.
  *
@@ -28,8 +31,7 @@
 
 class RobotP {  // Robot storing repair facility by Pointer
 public:
-    RobotP(const std::string &name, RepairFacility const *repairFacility)
-        : _name(name), _repairFacility(repairFacility) {}
+    RobotP(std::string name, RepairFacility const *repairFacility) : _name(std::move(name)), _repairFacility(repairFacility) {}
 
     void repair() const { //only change from before is -> instead of .
         cout << "This is " << _name << " going to get repaired at "
@@ -41,7 +43,7 @@ public:
     }
 
 private:
-    std::string _name;
+    std::string _name{};
     RepairFacility const *_repairFacility;
 };
 

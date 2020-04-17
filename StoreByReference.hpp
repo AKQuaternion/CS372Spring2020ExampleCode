@@ -25,11 +25,11 @@
 
 class RepairFacility {
 public:
-    RepairFacility(const std::string &location) : _location(location) {}
-    std::string getLocation() const { return _location; }
+    explicit RepairFacility(const std::string &location) : _location(location) {}
+    [[nodiscard]] std::string getLocation() const { return _location; }
 
 private:
-    std::string _location;
+    std::string _location{};
 };
 
 class RobotR {  // Robot storing repair facility by reference
@@ -43,7 +43,7 @@ public:
     }
 
 private:
-    std::string _name;
+    std::string _name{};
     const RepairFacility &_repairFacility;
 };
 

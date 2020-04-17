@@ -82,7 +82,7 @@ void async_main() {
 
 class Foo {
 public:
-  Foo(int x) : _x(x)
+  explicit Foo(int x) : _x(x)
   {}
 
   [[nodiscard]] std::string operator()() {

@@ -8,11 +8,11 @@
 #include "Subject.hpp"
 #include <algorithm>
 
-void Subject::attach(std::shared_ptr<Observer> o){
+void Subject::attach(const std::shared_ptr<Observer>& o){
     _observers.insert(o);
 }
 
-void Subject::detach(std::shared_ptr<Observer> o){
+void Subject::detach(const std::shared_ptr<Observer>& o){
     _observers.erase(o);
 }
 

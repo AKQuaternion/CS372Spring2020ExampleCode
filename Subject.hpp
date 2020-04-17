@@ -14,8 +14,8 @@
 
 class Subject {
 public:
-    void attach(std::shared_ptr<Observer>);
-    void detach(std::shared_ptr<Observer>);
+    void attach(const std::shared_ptr<Observer>&);
+    void detach(const std::shared_ptr<Observer>&);
     void setN(int n);
 private:
     void notify() const;
