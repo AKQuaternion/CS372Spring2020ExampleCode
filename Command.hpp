@@ -14,7 +14,7 @@
 class Command {
    public:
     virtual ~Command() = default;
-    virtual void execute() = 0;
+    void execute() {}
 };
 
 /* In this example code we include the declarations of derived command
@@ -52,6 +52,11 @@ public:
 
 private:
    std::shared_ptr<HomeAutomationComponent> _hac;
+};
+
+class NullCommand : public Command {
+public:
+   void execute() override;
 };
 
 class VoidFunctionCommand : public Command {

@@ -19,6 +19,8 @@ void HACOffCommand::execute() { _hac->off(); }
 HACOffCommand::HACOffCommand(std::shared_ptr<HomeAutomationComponent> hac)
       : _hac(std::move(hac)) {}
 
+void NullCommand::execute() { }
+
 VoidFunctionCommand::VoidFunctionCommand(std::function<void()> f) : _f(std::move(f)) {}
 
 void VoidFunctionCommand::execute() { _f(); }
@@ -26,4 +28,3 @@ void VoidFunctionCommand::execute() { _f(); }
 MacroCommand::MacroCommand(std::vector<std::shared_ptr<Command>> commands)
    : _commands(std::move(commands)) {}
 
-void NullCommand::execute() {}
