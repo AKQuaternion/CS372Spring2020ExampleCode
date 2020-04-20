@@ -129,13 +129,15 @@ void demonstrateDecorator() {
 //   fanOnCommand.execute();
 
    vector<shared_ptr<Command>> v(10,make_shared<NullCommand>());
-   v[0] = std::make_shared<SayHiCommand>();
+   v[0] = make_shared<SayHiCommand>();
    v[1] = make_shared<HACOnCommand>(l);
    v[2] = make_shared<HACOffCommand>(l);
    v[3] = make_shared<VoidFunctionCommand>(demonstrateDecorator);
    v[4] = make_shared<VoidFunctionCommand>([](){cout << "It's Friday!\n";});
    v[9] = make_shared<ExitCommand>();
    v[5] = make_shared<MacroCommand>(vector<shared_ptr<Command>>({v[0],v[1],v[2],v[3],v[4]}));
+   auto doorHAC = make_shared<DoorAdapter>(make_shared<HouseDoor>());
+   v[6] = make_shared<HACOnCommand>(doorHAC);
    while(true) {
       cout << "What button? ";
       unsigned int button;

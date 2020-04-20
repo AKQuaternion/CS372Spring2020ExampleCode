@@ -14,7 +14,7 @@
 class Command {
    public:
     virtual ~Command() = default;
-    void execute() {}
+    virtual void execute() {}
 };
 
 /* In this example code we include the declarations of derived command

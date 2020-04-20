@@ -6,7 +6,7 @@
 #define CS372SPRING2020EXAMPLECODE_HOMEAUTOMATIONCOMPONENT_HPP
 
 #include <iostream>
-
+#include "Door.hpp"
 class HomeAutomationComponent {
 public:
    virtual ~HomeAutomationComponent() = default;
@@ -39,4 +39,13 @@ public:
    void off() final;
 };
 
+class DoorAdapter : public HomeAutomationComponent {
+public:
+   DoorAdapter(std::shared_ptr<Door> door) : _door(door) {}
+   void on() override { _door->open(); }
+   void off() override { _door->close(); }
+
+private:
+   std::shared_ptr<Door> _door;
+};
 #endif  // CS372SPRING2020EXAMPLECODE_HOMEAUTOMATIONCOMPONENT_HPP
