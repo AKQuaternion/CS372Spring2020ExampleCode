@@ -4,7 +4,8 @@ project(CS372Spring2020ExampleCode)
 add_executable(CS372Spring2020ExampleCode main.cpp moderncppexamples.cpp
         moderncppexamples.hpp Expression.cpp Expression.hpp StoreByReference.hpp
         StoreByPointer.hpp Observer.cpp Observer.hpp Subject.cpp Subject.hpp
-        Armor.cpp Armor.hpp HomeAutomationComponent.cpp Command.cpp Door.cpp Door.hpp)
+        Armor.cpp Armor.hpp HomeAutomationComponent.cpp Command.cpp Command.hpp
+        Door.cpp Door.hpp Composite.hpp Composite.cpp)
 
 target_compile_features(CS372Spring2020ExampleCode PRIVATE cxx_std_20)
 

@@ -22,6 +22,8 @@ using std::make_shared;
 using std::shared_ptr;
 using std::vector;
 
+#include "Composite.hpp"
+
 void demonstrateExpressions() {
    unique_ptr<Expression> fifteen = make_unique<NumberExpression>(15);
 
@@ -110,44 +112,56 @@ void demonstrateDecorator() {
         << endl;
 }
 
-[[noreturn]] void demonstrateCommand()   {
-
-//   SayHiCommand x;
-//   x.execute();
-//
-//   auto f = make_shared<FanObject>();
-//   f->on();
-//   f->off();
+[[noreturn]] void demonstrateCommand() {
+   //   SayHiCommand x;
+   //   x.execute();
+   //
+   //   auto f = make_shared<FanObject>();
+   //   f->on();
+   //   f->off();
    auto l = make_shared<LightObject>();
-//   l->on();
-//   l->off();
-//   auto s = make_shared<StereoObject>();
-//   s->on();
-//   s->off();
-//
-//   HACOnCommand fanOnCommand(f);
-//   fanOnCommand.execute();
+   //   l->on();
+   //   l->off();
+   //   auto s = make_shared<StereoObject>();
+   //   s->on();
+   //   s->off();
+   //
+   //   HACOnCommand fanOnCommand(f);
+   //   fanOnCommand.execute();
 
-   vector<shared_ptr<Command>> v(10,make_shared<NullCommand>());
+   vector<shared_ptr<Command>> v(10, make_shared<NullCommand>());
    v[0] = make_shared<SayHiCommand>();
    v[1] = make_shared<HACOnCommand>(l);
    v[2] = make_shared<HACOffCommand>(l);
    v[3] = make_shared<VoidFunctionCommand>(demonstrateDecorator);
-   v[4] = make_shared<VoidFunctionCommand>([](){cout << "It's Friday!\n";});
+   v[4] = make_shared<VoidFunctionCommand>([]() { cout << "It's Friday!\n"; });
    v[9] = make_shared<ExitCommand>();
-   v[5] = make_shared<MacroCommand>(vector<shared_ptr<Command>>({v[0],v[1],v[2],v[3],v[4]}));
+   v[5] = make_shared<MacroCommand>(
+      vector<shared_ptr<Command>>({v[0], v[1], v[2], v[3], v[4]}));
    auto doorHAC = make_shared<DoorAdapter>(make_shared<HouseDoor>());
    v[6] = make_shared<HACOnCommand>(doorHAC);
-   while(true) {
+   while (true) {
       cout << "What button? ";
       unsigned int button;
       std::cin >> button;
       v[button]->execute();
    }
 
+   //   ExitCommand ex;
+   //   ex.execute();
+}
 
-//   ExitCommand ex;
-//   ex.execute();
+void demonstrateComposite() {
+       auto f1 = make_unique<File>("f1", 1);
+   cout << f1->getName() << " " << f1->getSize() << endl;
+   auto folder1 = make_unique<Folder>("folder1");
+   folder1->add(move(f1));
+   cout << folder1->getName() << " " << folder1->getSize() << endl;
+   folder1->add(make_unique<File>("f2", 2));
+   folder1->add(make_unique<File>("f3", 3));
+   cout << folder1->getName() << " " << folder1->getSize() << endl;
+   folder1->remove("f2");
+   cout << folder1->getName() << " " << folder1->getSize() << endl;
 }
 
 int main() {
@@ -157,7 +171,8 @@ int main() {
    //   demonstrateExpressions();
    //   demonstrateObserver();
    //   demonstrateDecorator();
-   demonstrateCommand();
+//   demonstrateCommand();
+demonstrateComposite();
    return 0;
 }
 
