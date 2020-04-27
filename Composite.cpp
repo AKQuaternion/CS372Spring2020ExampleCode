@@ -22,7 +22,7 @@ std::string ComponentBase::getName() const
     return _name;
 }
 
-File::File(std::string_view name, int size):Component(name),_size(size)
+File::File(std::string_view name, int size):ComponentBase(name),_size(size)
 {}
 
 void File::print() const
@@ -56,7 +56,7 @@ void Folder::add(std::unique_ptr<ComponentBase> child)
 void Folder::remove(std::string_view name)
 {
     for(auto i = _children.begin(); i != _children.end(); ++i)
-        if ((*i)->getName() == name){
+        if ((*i)->getName() == name){ //TODO use find!!!
             _children.erase(i);
             return;
         }

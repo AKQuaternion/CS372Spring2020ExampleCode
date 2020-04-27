@@ -18,13 +18,7 @@ private:
     const std::string _name;
 };
 
-template <typename Derived>
-class Component : public ComponentBase {
-public:
-    using ComponentBase::ComponentBase;
-};
-
-class File : public Component<File>
+class File : public ComponentBase
 {
 public:
     File(std::string_view name, int size);
@@ -34,10 +28,10 @@ private:
     int _size;
 };
 
-class Folder : public Component<Folder>
+class Folder : public ComponentBase
 {
 public:
-    using Component::Component;
+    using ComponentBase::ComponentBase;
     using ChildContainer = std::vector<std::unique_ptr<ComponentBase>>;
     void print()  const override;
     [[nodiscard]] int getSize() const override;
