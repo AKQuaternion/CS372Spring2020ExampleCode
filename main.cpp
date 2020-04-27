@@ -23,6 +23,7 @@ using std::shared_ptr;
 using std::vector;
 
 #include "Composite.hpp"
+#include "MP3Player.hpp"
 
 void demonstrateExpressions() {
    unique_ptr<Expression> fifteen = make_unique<NumberExpression>(15);
@@ -152,7 +153,7 @@ void demonstrateDecorator() {
 }
 
 void demonstrateComposite() {
-       auto f1 = make_unique<File>("f1", 1);
+   auto f1 = make_unique<File>("f1", 1);
    cout << f1->getName() << " " << f1->getSize() << endl;
    auto folder1 = make_unique<Folder>("folder1");
    folder1->add(move(f1));
@@ -162,17 +163,32 @@ void demonstrateComposite() {
    cout << folder1->getName() << " " << folder1->getSize() << endl;
    folder1->remove("f2");
    cout << folder1->getName() << " " << folder1->getSize() << endl;
+   folder1->print();
+}
+
+void demonstrateState() {
+    MP3Player myMp3(make_unique<Off>()); //should actually have simple factory
+    myMp3.pushNextButton();     //nothing
+    myMp3.pushSourceButton();   //Switch to radio (start playing radio)
+    myMp3.pushNextButton();     //Next radio station
+    myMp3.pushSourceButton();   //Switch to MP3 (stop playing radio, start playing MP3)
+    myMp3.pushNextButton();     //Next track
+    myMp3.pushNextButton();     //Next track
+    myMp3.pushSourceButton();   //Switch to off (stop mp3)
+    myMp3.pushNextButton();     //nothing
+    myMp3.pushSourceButton();   //Switch to radio (start playing radio)
 }
 
 int main() {
-   //   modernCppExamples();
-   //   demonstrateStoreByReference();
-   //   demonstrateStoreByPointer();
-   //   demonstrateExpressions();
-   //   demonstrateObserver();
-   //   demonstrateDecorator();
+//   modernCppExamples();
+//   demonstrateStoreByReference();
+//   demonstrateStoreByPointer();
+//   demonstrateExpressions();
+//   demonstrateObserver();
+//   demonstrateDecorator();
 //   demonstrateCommand();
-demonstrateComposite();
+//   demonstrateComposite();
+   demonstrateState();
    return 0;
 }
 
